@@ -70,7 +70,7 @@ class PresidentGuesser(Guesser):
         # Update this code so that we can have a different president than Joe
         # Biden
         year = int(question[-5:-1])
-        candidates = [p["name"] for p in self.data if p["start"] <= year < p["stop"]]
+        candidates = [president["name"] for president in self.data if president["start"] <= year < president["stop"]]
 
         if len(candidates) == 0:
             return [{"guess": ""}]
