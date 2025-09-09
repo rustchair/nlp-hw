@@ -69,13 +69,13 @@ class PresidentGuesser(Guesser):
     def __call__(self, question, n_guesses=1):
         # Update this code so that we can have a different president than Joe
         # Biden
-        year = int(question[-5:-1])
-        candidates = [president["name"] for president in self.data if president["start"] <= year < president["stop"]]
+        year = int(question.split()[-1].strip("?.!,"))
+        president = next((p["name"] for p in self.data if p["start"] <= year < max(p["start"] + 1, p["stop"])), "")
 
         if len(candidates) == 0:
             return [{"guess": ""}]
         else:
-            return [{"guess": x} for x in candidates]
+            return [{"guess": president}]
         
 if __name__ == "__main__":
     pg = PresidentGuesser()
