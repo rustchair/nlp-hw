@@ -72,10 +72,7 @@ class PresidentGuesser(Guesser):
         year = int(question.split()[-1].strip("?.!,"))
         president = next((p["name"] for p in self.data if p["start"] <= year < max(p["start"] + 1, p["stop"])), "")
 
-        if len(candidates) == 0:
-            return [{"guess": ""}]
-        else:
-            return [{"guess": president}]
+        return [{"guess": president}]
         
 if __name__ == "__main__":
     pg = PresidentGuesser()
