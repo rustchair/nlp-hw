@@ -64,12 +64,13 @@ kPRESIDENT_DATA = {"train": [
 
 class PresidentGuesser(Guesser):
     def train(self, training_data):
-        self._lookup = defaultdict(dict)
+        self.data = training_data
             
     def __call__(self, question, n_guesses=1):
         # Update this code so that we can have a different president than Joe
         # Biden
-        candidates = ["Joseph R. Biden"]
+        year = int(question[-5:-1])
+        candidates = [p["name"] for p in self.data if p["start"] <= year < p["stop"]]
 
         if len(candidates) == 0:
             return [{"guess": ""}]
